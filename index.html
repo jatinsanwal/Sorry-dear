@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+.slide {
+  display: none;
+  padding: 50px;
+  height: 100vh;
+}
+
+.active {
+  display: block;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+p {
+  font-size: 22px;
+  max-width: 700px;
+  margin: auto;
+}
+
+button {
+  margin-top: 30px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  color: #ff4d6d;
+  cursor: pointer;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  color: red;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% {transform: translateY(100vh);}
+  100% {transform: translateY(-10vh);}
+}
+
+/* Petals */
+.petal {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: pink;
+  border-radius: 50%;
+  animation: fall 8s linear infinite;
+}
+
+@keyframes fall {
+  0% {transform: translateY(-10vh);}
+  100% {transform: translateY(100vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="slide active" id="slide1">
+  <h1 id="text1"></h1>
+  <button onclick="nextSlide()">Next ❤️</button>
+</div>
+
+<div class="slide" id="slide2">
+  <h1 id="text2"></h1>
+  <button onclick="nextSlide()">Next ❤️</button>
+</div>
+
+<div class="slide" id="slide3">
+  <h1 id="text3"></h1>
+  <button onclick="nextSlide()">Next ❤️</button>
+</div>
+
+<div class="slide" id="slide4">
+  <h1 id="text4"></h1>
+  <button onclick="nextSlide()">Next ❤️</button>
+</div>
+
+<div class="slide" id="slide5">
+  <h1 style="font-size:60px;">I LOVE YOU ❤️</h1>
+</div>
+
+<script>
+let current = 0;
+let slides = document.querySelectorAll(".slide");
+
+function nextSlide() {
+  slides[current].classList.remove("active");
+  current++;
+  slides[current].classList.add("active");
+}
+
+/* Typing effect */
+function typeText(id, text, speed=40) {
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      document.getElementById(id).innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
+
+/* Messages */
+typeText("text1", "Suniye... mujhe aapse kuch kehna hai ❤️");
+setTimeout(()=>typeText("text2","Maine jo bhi kaha... wo sab galat tha... aur main dil se sharminda hoon..."),2000);
+setTimeout(()=>typeText("text3","Aap bahut special ho... aur maine hi aapko hurt kar diya..."),4000);
+setTimeout(()=>typeText("text4","Agar ho sake to mujhe maaf kar dijiye... main sach me sudharna chahta hoon..."),6000);
+
+/* Hearts */
+setInterval(()=>{
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.innerHTML = "❤️";
+  heart.style.fontSize = (20 + Math.random()*20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+},300);
+
+/* Petals */
+setInterval(()=>{
+  let petal = document.createElement("div");
+  petal.className = "petal";
+  petal.style.left = Math.random()*100 + "vw";
+  document.body.appendChild(petal);
+  setTimeout(()=>petal.remove(),8000);
+},500);
+</script>
+
+</body>
+</html>
